@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <!-- Loading JS -->
+    <script defer src="./main.js"></script>
+    <!-- Linking External CSS -->
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <h1>Input Tags</h1>
+
+    <!-- Self Closing Tags -->
+    <!-- Focussing the input: Dark Outline with Blinking typing cursor -->
+    <label for="fullName">Full Name:</label>
+    <input id="fullName" type="text" placeholder="Enter Your Name..." />
+    <!-- Break -->
+    <br />
+    <label for="email">Email:</label>
+    <input id="email" type="email" placeholder="Enter Your Email..." />
+    <!-- sundeeep@gmail.com -->
+    <br />
+    <label for="password">Password:</label>
+    <input id="password" type="password" placeholder="Enter Your Password...">
+    <br>
+    <label for="male">Male</label>
+    <input type="radio" id="male" name="gender" value="Male">
+
+    <label for="female">female</label>
+    <input type="radio" id="female" name="gender" value="female">
+    <!-- name is like a key and value is assigned to it -->
+    <br>
+
+    <label for="Batch">Choose a Batch</label>
+    <select name="Batch" id="Batch">
+        <option value="Batch-2">Batch-2</option>
+        <option value="Batch-3">Batch-3</option>
+        <option value="Batch-4">Batch-4</option>
+        <option value="Batch-5">Batch-5</option>
+
+    </select>
+    <br>
+    <!-- assign , gender , select batch use select tag and options -->
+    <button id="btn-register" class="btn st-btn">submit</button>
+     
+</body>
+
+</html>

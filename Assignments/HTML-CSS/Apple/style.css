@@ -1,0 +1,265 @@
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+#nav-bar{
+    display: flex;  
+    list-style-type: none;
+    justify-content: space-between;
+    padding-left: 270px;
+    padding-right: 270px;
+    padding-top: 15px;
+    width: auto;
+    height: 20px;
+    font-family: SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: small;
+    padding-bottom: 10px;
+
+
+}
+.nav-container{
+    height: 50px;
+    background-color: rgb(239, 238, 238);
+    
+
+}
+
+.apple-icon{
+    height: 23px;
+}
+.header-Container{
+    display: flex;
+    padding: 15px 260px;
+    font-family: SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif;
+    background: rgba(245, 245, 247, .6);
+    
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(100px);
+    z-index: 10;
+
+
+
+}
+.delivery-info{
+    padding-left: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.delivery-info-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+.delivery-info-container div h6{
+    padding-left: 10px;
+    font-family: SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: smaller;
+    font-weight: 100;
+
+}
+.find-store{
+    padding-left: 20px;
+    font-family: SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif;
+    color:var(--sk-body-link-color,#06c);
+
+}
+.main-img-container{
+
+display: flex;
+    justify-content: center;
+    align-content: space-between;
+
+    background-color: #121933;
+}
+.main-img{
+    width: 696px;
+    height: 320px;
+}
+.img-info{
+    background-color: #121933;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.img-header{
+    color: white;
+    font-size: 64px;
+    font-family: SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif;
+
+}
+
+.img-p1{
+    color: white;
+    margin-top: 20px;
+    font-family: SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 24px;
+
+}
+.img-p2{
+    color: white;
+    font-size: large;
+    margin-bottom: 20px;
+    font-family: SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 24px;
+
+}
+
+.iphone-17pro-img{
+    width: 100%;
+}
+
+.iphone-17pro-text{
+    color: white;
+}
+.iphone-17pro-description-container{
+    display: flex;
+    padding-top: 20px;
+    flex-direction: column;
+    align-items: center;
+    background: black;
+}
+.headline {
+    font-size: 40px;
+    font-family: "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+}
+.subhead{
+     font-size: 28px;
+    font-family: "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+}
+.iphone-17pro-text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.apple-products-grid-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;  
+}
+.product-links{
+  padding-top: 5px;   
+}
+.product-container{
+    
+    width: 50%;
+    position: relative;
+}
+.product-description{
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ padding-top: 20px;
+ width: 750px;
+ position: absolute;
+ top: 0;
+ 
+ z-index: 10;
+}
+.product-img{
+    width: 750px;
+    
+    
+}
+.product-text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+
+.apple-btn {
+  display: inline-block;
+  padding: 10px 22px;
+  background-color: #0071e3;      
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+               "Segoe UI", sans-serif;
+  border-radius: 999px;           
+  text-decoration: none;
+  line-height: 1;
+  
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.apple-btn:hover {
+  background-color: #0077ed;     
+}
+
+.apple-btn:active {
+  transform: scale(0.97);
+}
+
+
+.apple-btn-outline {
+  display: inline-block;
+  padding: 8px 22px;
+  background-color: transparent;
+  color: #0071e3;                 
+  font-size: 14px;
+  font-weight: 400;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+               "Segoe UI", sans-serif;
+  border-radius: 999px;           
+  border: 1px solid #0071e3;      
+  text-decoration: none;
+  line-height: 1;
+  
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.apple-btn-outline:hover {
+  background-color: #0071e3;
+  color: #ffffff;
+}
+.headline-product{
+   font-size: 40px;
+   line-height: 1.1;
+   font-weight: 600;
+   font-family: "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+   
+}
+.subhead-product{
+   font-family: "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+    
+}
+.footnote-container{
+    display: flex;
+    flex-direction: column;
+    padding-left: 200px;
+    padding-right: 200px;
+    list-style-type: none;
+    background: rgb(245, 245, 247);
+    margin-top: 30px;
+    font-family: "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+    font-size: small;
+    font-weight: 100;
+    column-gap: normal;
+    
+}
+.footnote-container {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #6e6e73;        
+  background-color: #f5f5f7;
+  padding: 16px 24px;
+}
+
+.footnote-container a {
+  color: #0066cc;
+  text-decoration: underline;
+}
+
+.footnote-container a:hover {
+  text-decoration: none;
+}
+
