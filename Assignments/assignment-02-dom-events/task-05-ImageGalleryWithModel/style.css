@@ -84,3 +84,8 @@ h1 {
     cursor: pointer;
     border-radius: 5px;
 }
+
+.gallery-container {
+    display: flex;
+    justify-content: center;
+}
