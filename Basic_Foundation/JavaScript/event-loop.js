@@ -21,3 +21,6 @@ fetch("https://fakestoreapi.com/products").then((data) => { return data.json() }
 
 fetch("https://fakestoreapi.com/users").then((data) => { return data.json() }).then((data) => console.log(data)).catch((error) => console.log(error));
 
+console.log(" program end");
+
+
