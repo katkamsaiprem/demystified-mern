@@ -7,7 +7,7 @@ setTimeout(() => {
 setTimeout(() => {
     console.log("3. setTimeout two");
 
-})
+}, 0)
 setTimeout(() => {
     console.log("4. setTimeout three");
 
@@ -15,7 +15,7 @@ setTimeout(() => {
 setTimeout(() => {
     console.log("5. setTimeout four");
 
-},0)
+}, 0)
 
 fetch("https://fakestoreapi.com/products").then((data) => { return data.json() }).then((data) => { console.log(data) }).catch((error) => console.log(error));
 
