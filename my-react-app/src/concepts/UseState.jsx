@@ -1,5 +1,5 @@
-import { Component, use, useState } from "react";
-import { PrimaryButton } from "./PrimaryButton";
+import { useState } from "react";
+import { PrimaryButton } from "../components/PrimaryButton";
 
 
 // hook is function 
@@ -14,7 +14,7 @@ import { PrimaryButton } from "./PrimaryButton";
 
 
 
-const useStateComponet = () => {
+const UseState = () => { // better to write componet name with captial letter to make it different from xml element while calling this component
 
     const getFullName = (firstName, lastName) => {
         console.log("getFullName function invoked");
@@ -22,7 +22,7 @@ const useStateComponet = () => {
 
     }
 
-    const [userName, setUserName] = useState(() =>getFullName("Saiprem", "katkam"))
+    const [userName, setUserName] = useState(() => getFullName("Saiprem", "katkam"))
     console.log(userName);
 
     const attachLastName = (lastName) => {
@@ -38,4 +38,4 @@ const useStateComponet = () => {
         </>
     )
 }
-export default useStateComponet;
+export default UseState;
