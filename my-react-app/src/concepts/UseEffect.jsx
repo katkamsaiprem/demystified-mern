@@ -6,7 +6,7 @@ import { PrimaryButton } from "../components/PrimaryButton";
 const UseEffect = () => {
 
     const [state, setState] = useState(1);
-
+    //react life cycle event call componentDidMount (useEffect) when component mounted;
     useEffect(() => {
         console.log("useEffect-1 has been triggered");
 

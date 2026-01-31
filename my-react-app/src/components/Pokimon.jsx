@@ -1,44 +1,11 @@
 //things that frontend developer should remainder to render data
 import { useEffect, useState } from "react";
+import useQuery from "../concepts/UseQuery";
 
 const PokemonList = () => {
+    const { data, isLoading, error } = useQuery("https://pokeapi.co/api/v2/pokemon/pikachu");
 
-    //state data is to show to users
-    const [data, setData] = useState(null);//we keep this as null, because we dont know what type of data we get from backend
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
 
-    const fetchPokimon = async () => {
-        try {
-            const response = await fetch("https://pokeapi.co/api/v2/pokemon/ditto");
-            console.log(response);
-
-            if (!response.ok) {
-                console.log("dafsdf ");
-
-                throw new Error("Requesting data is failed- wrong api endpoint");
-
-            }
-            const data = await response.json();
-            setData(data);
-        }
-        catch (error) {
-            console.log(error)
-            setError(error.message)
-
-        }
-        finally {
-            setIsLoading(false);//we should stop loading ,when we get data from backend ,data can be fullfilled or failed
-        }
-
-    }
-    //we need to fetch the data only onces when component is monted first time
-    useEffect(() => {
-        console.log("inside useEffect");
-
-        fetchPokimon();
-
-    }, [])//used empty to call useEffect only onces when component is rendered
 
     if (isLoading) {
         console.log("loading ui");
@@ -66,6 +33,14 @@ const PokemonList = () => {
         <>
             <h1>Pokimons</h1>
             <p>{JSON.stringify(data)}</p>
+            {//Why we need to convert the object to a string:
+                // The Problem:
+                // In React/JSX, you cannot directly render JavaScript objects. If you try to render an object like <p>{data}</p>, React will throw an error:
+
+                // The Solution:
+                // JSON.stringify(data) converts the object into a string representation, which React can safely render as text.
+
+            }
         </>
     )
 }
