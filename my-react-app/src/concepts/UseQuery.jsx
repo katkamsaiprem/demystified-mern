@@ -10,7 +10,7 @@ const useQuery = (fetchURL) => {
     const fetchPokimon = async () => {
         try {
             const response = await fetch(fetchURL);
-            console.log(response);       //---ip adress------\\--endpoint--------
+            console.log(response);       
             //respone doesnt throw error ,so we need to throw
             if (!response.ok) {
                 console.log("dafsdf");
