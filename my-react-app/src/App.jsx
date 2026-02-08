@@ -1,7 +1,7 @@
 import UseEffect from "./concepts/UseEffect";
 import PokemonList from "./components/Pokimon";
 import { Outlet } from "react-router-dom";
-
+import RegisterUserPage from "./pages/RegisterUserPage";
 import TodoApp from "./components/TodoApp";
 function App() {
   return (
@@ -15,8 +15,11 @@ function App() {
       <main>
         <Outlet />
       </main> */}
-      <TodoApp />
 
+      {/* <TodoApp /> */}
+
+
+      {<RegisterUserPage />}
     </>
   )
 }
