@@ -2,7 +2,7 @@
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router'
 import HomePage from './Pages/HomePage.jsx'
-import Profile from './pages/Profile.jsx'
+import Profile from './Pages/profile.jsx'
 import './index.css'
 import App from './App.jsx'
 import RegisterUserPage from './pages/RegisterUserPage.jsx'
@@ -36,7 +36,7 @@ react-router-dom is a library
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <App />
+        element: <HomePage />
 
     },
     {

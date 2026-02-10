@@ -28,7 +28,7 @@ const RegisterUserPage = () => {
 
 
         try {
-            //send post req to appwriter to creat new user
+            //send post req to appwriter to create new user
 
             //send user data
             const userData = { name, email, password }
