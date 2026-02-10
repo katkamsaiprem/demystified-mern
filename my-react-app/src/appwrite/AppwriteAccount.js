@@ -29,9 +29,9 @@ class AppwriteAccount {
     }
     //Method 2 :- login the user , creates login session
     async loginWithEmailAndPassword(data) {
-        const session = await await this.appwriteAccount.loginWithEmailAndPassword({
+        const session = await await this.appwriteAccount.createEmailPasswordSession(({
             ...data
-        })
+        }))
         return session;
 
     }
@@ -44,7 +44,7 @@ class AppwriteAccount {
 
     //logout user session
     async logoutUser() {
-        await await this.appwriteAccount.deleteSession('current')
+        await this.appwriteAccount.deleteSession('current')
     }
 
 
