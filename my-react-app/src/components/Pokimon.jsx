@@ -4,7 +4,7 @@ import useQuery from "../concepts/UseQuery";
 
 const PokemonList = () => {
     const { data, isLoading, error } = useQuery("https://pokeapi.co/api/v2/pokemon/pikachu");
-                                                 //---ip adress------\\--endpoint--------
+    //---ip adress------\\--endpoint--------
 
 
     if (isLoading) {

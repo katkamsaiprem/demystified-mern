@@ -12,12 +12,13 @@ const HomePage = () => {
         const checkUser = async () => {
             try {
                 const currentUser = await appwriteAccount.getCurrentUser();
-                console.log("currrent ", response);
+                console.log("currrent ", currentUser);
                 setUser(currentUser);
 
             }
-            catch (error) {
-                console.error("unable to get Current User data", error.message);
+            catch (err) {
+                console.error("unable to get Current User data", err);
+
 
 
             }
