@@ -9,6 +9,7 @@
 import { useNavigate } from "react-router-dom";
 import { appwriteAccount } from "../appwrite/AppwriteAccount";
 import { useState } from "react";
+import { Bounce, toast } from "react-toastify";
 
 const RegisterUserPage = () => {
     const [name, setFullName] = useState("");
@@ -22,7 +23,7 @@ const RegisterUserPage = () => {
     const registerNewUser = async (event) => {
         event.preventDefault();
         setLoading(true);
-        setError("")
+        setError("")//on click we need to clear user message
 
 
 
@@ -31,15 +32,36 @@ const RegisterUserPage = () => {
 
             //send user data
             const userData = { name, email, password }
-            const response = await appwriteAccount.createUser(userData);
-            console.log("User Created:-", response);
+            await appwriteAccount.createUser(userData);
+            toast.success('User Registered', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
 
             //Redirect to login page
             navigate("/login")
         }
         catch (error) {
-            console.error("Registration error", error);
+
             setError(error.message || "Failed To Register")
+            toast.error('Failed To Register', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
 
         }
         finally {

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useUserStore from "../stores/useUserStore";
 import { appwriteAccount } from "../appwrite/AppwriteAccount";
 import { useState } from "react";
+import { Bounce, toast } from "react-toastify";
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -48,7 +49,17 @@ const LoginPage = () => {
             //Save to Zustand store
             setUser(currentUser);
 
-            console.log("Logged in:", currentUser);
+            toast.success('Logged in Successful', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
 
             //Redirect to home
             navigate("/");
@@ -56,6 +67,17 @@ const LoginPage = () => {
         catch (error) {
             console.error(error);
             setError(error.message || "Failed to login")
+            toast.error('Failed to login', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
         }
         finally {
             setLoading(false);

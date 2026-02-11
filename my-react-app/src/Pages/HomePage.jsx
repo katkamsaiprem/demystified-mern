@@ -14,7 +14,10 @@ const HomePage = () => {
             try {
                 const currentUser = await appwriteAccount.getCurrentUser();
                 console.log("currrent ", currentUser);
-                setUser(currentUser);
+                if (currentUser) {
+                    setUser(currentUser);
+
+                }
 
             }
             catch (err) {

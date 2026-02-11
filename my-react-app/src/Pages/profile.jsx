@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { appwriteAccount } from "../appwrite/AppwriteAccount"
 import useUserStore from "../stores/useUserStore";
+import { useEffect } from "react";
+import { Bounce, toast } from "react-toastify";
 
 const Profile = () => {
 
@@ -12,15 +14,26 @@ const Profile = () => {
 
     const navigate = useNavigate();
 
-    const getUserData = async () => {
-        //if page referesh then store data gets cleared ,so lets get data from appwrite
-        const existingUserData = await appwriteAccount.getCurrentUser();
-        if (existingUserData) {
-            setUser(existingUserData);
-        }
+    useEffect(() => {
+        const getUserData = async () => {
+            //if page refresh then store data gets cleared, so lets get data from appwrite
+            if (!user) { // Only fetch if user doesn't exist
+                try {
+                    const existingUserData = await appwriteAccount.getCurrentUser();
+                    if (existingUserData) {
+                        setUser(existingUserData);
+                    }
+                } catch (error) {
+                    console.log("Failed to get user data:", error);
+                    navigate("/login");
+                }
+            }
+        };
 
-    }
-    getUserData();
+        getUserData();
+    }, []);
+
+
 
 
     const handleLogout = async () => {
@@ -28,10 +41,32 @@ const Profile = () => {
             await appwriteAccount.logoutUser();
             clearUser();
             navigate("/login")
+            toast.success('User Registered', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
 
         }
         catch (error) {
             console.log("Logout error:", error);
+            toast.error('Failed to login', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
 
         }
 
