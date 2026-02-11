@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import AppwriteAccount from "../appwrite/AppwriteAccount";
+
 import useUserStore from "../stores/useUserStore";
+import { appwriteAccount } from "../appwrite/AppwriteAccount";
 import { useState } from "react";
 
 const LoginPage = () => {
@@ -9,9 +10,10 @@ const LoginPage = () => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const appwriteAccount = new AppwriteAccount();
+
     const setUser = useUserStore((state) => state.setUser);
     const navigate = useNavigate();
+
 
 
 
@@ -21,12 +23,12 @@ const LoginPage = () => {
         setError("");
         try {
             try {
-                const existingUser = await appwriteAccount.getCurrentUser();
+                const existingUserData = await appwriteAccount.getCurrentUser();
                 //if no existingUserSession ,then it throws error exception
                 if (existingUserSession) {
                     //if user closes the index.html or refreshes the pages, store data get cleared but user login session data still present in cookies,
                     //but when you goes to homepage ,zustand says no user data, but appwrite says "you already logged in "
-                    setUser(existingUser)
+                    setUser(existingUserData)
                     navigate("/")
                     return
 

@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom"
 import useUserStore from "../stores/useUserStore";
-import AppwriteAccount from "../appwrite/AppwriteAccount";
+import { appwriteAccount } from "../appwrite/AppwriteAccount";
+
 import { useEffect } from "react";
 const HomePage = () => {
     const user = useUserStore((state) => state.user);
     const setUser = useUserStore((state) => state.setUser);
 
-    const appwriteAccount = new AppwriteAccount();
+
     //check if the user is logged in when app loads
     useEffect(() => {
         const checkUser = async () => {

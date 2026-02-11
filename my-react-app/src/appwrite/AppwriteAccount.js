@@ -44,13 +44,19 @@ class AppwriteAccount {
 
     //logout user session
     async logoutUser() {
-        await this.appwriteAccount.deleteSession('current')
+        await this.appwriteAccount.deleteSession({
+            sessionId: 'current'
+        })
     }
+
+
+
 
 
 
 }
 
+export const appwriteAccount = new AppwriteAccount();
 export default AppwriteAccount;
 
 

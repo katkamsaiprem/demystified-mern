@@ -7,7 +7,7 @@
  */
 
 import { useNavigate } from "react-router-dom";
-import AppwriteAccount from "../appwrite/AppwriteAccount";
+import { appwriteAccount } from "../appwrite/AppwriteAccount";
 import { useState } from "react";
 
 const RegisterUserPage = () => {
@@ -17,8 +17,7 @@ const RegisterUserPage = () => {
     const [error, setError] = useState("");// empty string is false
     const [loading, setLoading] = useState(false);
 
-    //create appwrite obj to access its functions
-    const appwriteAccount = new AppwriteAccount();
+
     const navigate = useNavigate()
     const registerNewUser = async (event) => {
         event.preventDefault();

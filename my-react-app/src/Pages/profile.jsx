@@ -1,14 +1,26 @@
 import { useNavigate } from "react-router-dom";
-import AppwriteAccount from "../appwrite/AppwriteAccount"
+import { appwriteAccount } from "../appwrite/AppwriteAccount"
 import useUserStore from "../stores/useUserStore";
 
 const Profile = () => {
 
+    //zustand store properties
     const user = useUserStore((state) => state.user)
     const clearUser = useUserStore((state) => state.clearUser)
-    const appwriteAccount = new AppwriteAccount();
+    const setUser = useUserStore((state) => state.setUser)
+
 
     const navigate = useNavigate();
+
+    const getUserData = async () => {
+        //if page referesh then store data gets cleared ,so lets get data from appwrite
+        const existingUserData = await appwriteAccount.getCurrentUser();
+        if (existingUserData) {
+            setUser(existingUserData);
+        }
+
+    }
+    getUserData();
 
 
     const handleLogout = async () => {
