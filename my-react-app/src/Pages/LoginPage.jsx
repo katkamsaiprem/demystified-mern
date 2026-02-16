@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import useUserStore from "../stores/useUserStore";
-import { appwriteAccount } from "../appwrite/AppwriteAccount";
+import { appwriteAccount } from "../appwrite-serivces/AppwriteAccount";
 import { useState } from "react";
 import { Bounce, toast } from "react-toastify";
 

@@ -15,6 +15,8 @@ import OverViewPage from './pages/Admin/overViewPage.jsx';
 import AdminCoursesPage from './pages/Admin/AdminCoursesPage.jsx';
 import AdminQuizesPage from './pages/Admin/AdminQuizesPage.jsx';
 import AdminTransationsPage from './pages/Admin/AdminTransationsPage.jsx';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 /*
 react-router-dom is a library
@@ -40,6 +42,16 @@ react-router-dom is a library
 
 
 // ])
+
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            staleTime: 1000 * 60 * 5,//data stays fresh for 5 mins
+            cacheTime: 1000 * 60 * 5,//keep unused data in cache for 10 mins
+            refetchOnWindowFocus: false,//dont refetch when user returns to tab
+        }
+    }
+})
 
 const router = createBrowserRouter([
     {
@@ -100,8 +112,14 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
     <>
-        <RouterProvider router={router} />
-        <ToastContainer />
+        {/* by wrapping with queryClientProvider we are all componets to get access to cache ,all comp can access tanstack query*/}
+        <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+            <ReactQueryDevtools />
+            <ToastContainer />
+
+        </QueryClientProvider>
+
     </>
 
     //  <App />

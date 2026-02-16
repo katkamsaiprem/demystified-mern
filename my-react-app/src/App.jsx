@@ -4,7 +4,7 @@ import { Link, Outlet } from "react-router-dom";
 import RegisterUserPage from "./pages/RegisterUserPage";
 import TodoApp from "./components/TodoApp";
 import LoginPage from "./pages/LoginPage";
-import AppwriteAccount from "./appwrite/AppwriteAccount";
+import AppwriteAccount from "./appwrite-serivces/AppwriteAccount";
 import useUserStore from "./stores/useUserStore";
 import { useEffect } from "react";
 import NavBar from "./components/NavBar";

@@ -1,21 +1,40 @@
-import { useEffect } from "react";
-import useTodoStore from "../stores/useTodoStore";
+import { useEffect, useState } from "react";
+import AppwriteTablesDB from "../appwrite-serivces/AppwriteTablesDB";
+import { useQuery } from "@tanstack/react-query";
 
 const TodoListing = () => {
 
-    const todos = useTodoStore(({ todos }) => (todos))//we are accessing the prev data using callback ,this callback returns todos
+    // const todos = useTodoStore(({ todos }) => (todos))//we are accessing the prev data using callback ,this callback returns todos
 
-    useEffect(() => {
-        console.log("re-render");
-        console.log(todos);
+    const appwriteTablesDB = new AppwriteTablesDB();
+    const fetchAllTodos = async () => {
+        try {
+            const todos = await appwriteTablesDB.getAllRecords("699360820027581db3da", "todos-table");
+            console.log(todos);
+            return todos;
+        }
+        catch (err) {
+            console.error(err);
 
+        }
+    }
+
+    const { data: todos, isLoading, isPending: isTodosPending, isFetching, isError, error } = useQuery({//changing data name into todos
+        queryKey: ["todos"],
+        queryFn: fetchAllTodos,
     })
+    if (isTodosPending) {//only on initial onmount it triggers
+        return <h1 className="text-5xl">Todos are Loading.......</h1>
+    }
     return (
 
-        <div>
-            {todos.map((todo, index) => {//key prop helps react tod identify items have changed ,added or removed
+        <div className="flex flex-col items-center gap-3">
+            {todos.map((todo) => {//key prop helps react tod identify items have changed ,added or removed
 
-                return <h1 key={index} >{todo}</h1>//d
+                return <article key={todo?.$id} className="p-3 bg-red-200 rounded-md shadow-sm">
+                    <h1 className="font-semibold text-xl">{todo?.text}</h1>
+                    <p>{todo?.description}</p>
+                </article>
             })}
         </div>
 

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { appwriteAccount } from "../appwrite/AppwriteAccount"
+import { appwriteAccount } from "../appwrite-serivces/AppwriteAccount"
 import useUserStore from "../stores/useUserStore";
 import { useEffect } from "react";
 import { Bounce, toast } from "react-toastify";

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import useUserStore from "../stores/useUserStore";
-import { appwriteAccount } from "../appwrite/AppwriteAccount";
+import { appwriteAccount } from "../appwrite-serivces/AppwriteAccount";
 
 import { useEffect } from "react";
 
