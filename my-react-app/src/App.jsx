@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import AppwriteAccount from "./appwrite/AppwriteAccount";
 import useUserStore from "./stores/useUserStore";
 import { useEffect } from "react";
+import NavBar from "./components/NavBar";
 
 function App() {
 
@@ -30,7 +31,14 @@ function App() {
 
       {/* {<RegisterUserPage />} */}
       {/* {<LoginPage />} */}
-      
+
+      <div>
+        <NavBar />
+        <main>
+          <Outlet />
+        </main>
+      </div>
+
 
 
 

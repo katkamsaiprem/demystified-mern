@@ -7,7 +7,14 @@ import './index.css'
 import App from './App.jsx'
 import RegisterUserPage from './pages/RegisterUserPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
-import HomePage from './pages/HomePage.jsx'
+import HomePage from './Pages/HomePage.jsx';
+import TodoApp from './components/TodoApp.jsx';
+import MyDashboardLayout from './pages/Admin/AdminDashboardLayout.jsx';
+import overViewPage from './pages/Admin/overViewPage.jsx';
+import OverViewPage from './pages/Admin/overViewPage.jsx';
+import AdminCoursesPage from './pages/Admin/AdminCoursesPage.jsx';
+import AdminQuizesPage from './pages/Admin/AdminQuizesPage.jsx';
+import AdminTransationsPage from './pages/Admin/AdminTransationsPage.jsx';
 
 /*
 react-router-dom is a library
@@ -37,7 +44,22 @@ react-router-dom is a library
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <HomePage />
+        element: <App />,
+        children: [
+            {
+                index: true,
+                element: <HomePage />
+
+            },
+            {
+                path: "profile",
+                element: <Profile />
+            },
+            {
+                path: "todo",
+                element: <TodoApp />
+            }
+        ]
 
     },
     {
@@ -48,11 +70,32 @@ const router = createBrowserRouter([
         path: "/login",
         element: <LoginPage />
     },
-
     {
-        path: "/profile",
-        element: <Profile />
+        path: "/admin-dashboard",
+        element: <MyDashboardLayout />,
+        children: [
+            {
+                index: true,
+                element: <OverViewPage />
+            },
+            {
+                path: "courses",
+                element: <AdminCoursesPage />
+            },
+            {
+                path: "quizes",
+                element: <AdminQuizesPage />
+            },
+            {
+                path: "transactions",
+                element: <AdminTransationsPage />
+            }
+
+        ]
     }
+
+
+
 ])
 
 createRoot(document.getElementById('root')).render(

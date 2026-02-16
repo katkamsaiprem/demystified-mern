@@ -5,7 +5,7 @@ const useUserStore = create((set) => ({
     user: null,
 
     //action to set user
-    setUser: (currentUser) => (set({ user: currentUser })),
+    setUser: (currentUser) => set({ user: currentUser }),
 
     //action to clear user(logOut)
     clearUser: () => (set({ user: null }))
