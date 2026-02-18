@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+
 import AppwriteTablesDB from "../appwrite-serivces/AppwriteTablesDB";
 import { useQuery } from "@tanstack/react-query";
 
@@ -9,7 +9,7 @@ const TodoListing = () => {
     const appwriteTablesDB = new AppwriteTablesDB();
     const fetchAllTodos = async () => {
         try {
-            const todos = await appwriteTablesDB.getAllRecords("699360820027581db3da", "todos-table");
+            const todos = await appwriteTablesDB.getAllRecords(import.meta.env.VITE_APPWRITE_DATABASE_ID, import.meta.env.VITE_APPWRITE_TODOS_TABLE_ID);
             console.log(todos);
             return todos;
         }
@@ -19,10 +19,14 @@ const TodoListing = () => {
         }
     }
 
+    //useQuery -used to Read/fetch data -store result in cache --runs automatically on mount --refetchs in background
     const { data: todos, isLoading, isPending: isTodosPending, isFetching, isError, error } = useQuery({//changing data name into todos
         queryKey: ["todos"],
         queryFn: fetchAllTodos,
     })
+
+
+
     if (isTodosPending) {//only on initial onmount it triggers
         return <h1 className="text-5xl">Todos are Loading.......</h1>
     }
@@ -33,7 +37,7 @@ const TodoListing = () => {
 
                 return <article key={todo?.$id} className="p-3 bg-red-200 rounded-md shadow-sm">
                     <h1 className="font-semibold text-xl">{todo?.text}</h1>
-                    <p>{todo?.description}</p>
+                    <p>{todo.description ? todo.description : "no desciption"}</p>
                 </article>
             })}
         </div>

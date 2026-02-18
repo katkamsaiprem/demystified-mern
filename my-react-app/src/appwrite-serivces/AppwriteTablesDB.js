@@ -1,4 +1,4 @@
-import { TablesDB } from "appwrite";
+import { ID, TablesDB } from "appwrite";
 import appwriteClient from ".";
 
 class AppwriteTablesDB {
@@ -14,6 +14,18 @@ class AppwriteTablesDB {
         })
         return records?.rows;
 
+    }
+
+    async CreateRecord(dataBaseID, tableID, data) {
+        const response = await this.tableDb.createRow({
+            databaseId: dataBaseID,
+            tableId: tableID,
+            rowId: ID.unique(),
+            data: data
+
+        })
+
+        return response;
     }
 }
 
