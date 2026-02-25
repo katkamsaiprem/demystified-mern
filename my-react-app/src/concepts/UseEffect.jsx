@@ -23,6 +23,7 @@ const UseEffect = () => {
 
     const IncrementCount = () => {
         console.log("increment has been clicked");
+
         setState(state + 1);
 
     }

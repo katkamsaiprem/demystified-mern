@@ -29,7 +29,7 @@ class AppwriteAccount {
     }
     //Method 2 :- login the user , creates login session
     async loginWithEmailAndPassword(data) {
-        const session = await await this.appwriteAccount.createEmailPasswordSession(({
+        const session = await this.appwriteAccount.createEmailPasswordSession(({
             ...data
         }))
         return session;
@@ -38,7 +38,7 @@ class AppwriteAccount {
 
     //get the current login user
     async getCurrentUser() {
-        const CurrentUser = await await this.appwriteAccount.get();
+        const CurrentUser = await this.appwriteAccount.get();
         return CurrentUser;
     }
 

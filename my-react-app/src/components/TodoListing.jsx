@@ -11,6 +11,7 @@ const TodoListing = () => {
         try {
             const todos = await appwriteTablesDB.getAllRecords(import.meta.env.VITE_APPWRITE_DATABASE_ID, import.meta.env.VITE_APPWRITE_TODOS_TABLE_ID);
             console.log(todos);
+            throw new Error("simple error")//to check error
             return todos;
         }
         catch (err) {
@@ -23,23 +24,43 @@ const TodoListing = () => {
     const { data: todos, isLoading, isPending: isTodosPending, isFetching, isError, error } = useQuery({//changing data name into todos
         queryKey: ["todos"],
         queryFn: fetchAllTodos,
+        throwOnError: (error) => {//to observe the error behaviour
+            console.log(error.message);
+        }
     })
 
 
-
-    if (isTodosPending) {//only on initial onmount it triggers
-        return <h1 className="text-5xl">Todos are Loading.......</h1>
+    if (isFetching) {
+        console.log("isFetching is true")
     }
+
+    // if (isTodosPending) {
+    //     console.log("isPending is true");
+
+    // }
+    if (isLoading)
+
+        if (isTodosPending) {//only on initial onmount it triggers
+            return <h1 className="text-5xl">Todos are Loading for the first time.......</h1>
+        }
     return (
-
         <div className="flex flex-col items-center gap-3">
-            {todos.map((todo) => {//key prop helps react tod identify items have changed ,added or removed
+            {
+                isLoading && <p>Loading...</p>
+            }
+            {
+                isFetching && <p>Fetching data...</p>//if you query then isFetching will be true
 
-                return <article key={todo?.$id} className="p-3 bg-red-200 rounded-md shadow-sm">
-                    <h1 className="font-semibold text-xl">{todo?.text}</h1>
-                    <p>{todo.description ? todo.description : "no desciption"}</p>
-                </article>
-            })}
+            }
+            {
+
+
+                todos?.map((todo) => {//key prop helps react tod identify items have changed ,added or removed
+                    return <article key={todo?.$id} className="p-3 bg-red-200 rounded-md shadow-sm">
+                        <h1 className="font-semibold text-xl">{todo?.text}</h1>
+                        <p>{todo.description ? todo.description : "no desciption"}</p>
+                    </article>
+                })}
         </div>
 
 

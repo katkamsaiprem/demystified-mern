@@ -17,6 +17,7 @@ import AdminQuizesPage from './pages/Admin/AdminQuizesPage.jsx';
 import AdminTransationsPage from './pages/Admin/AdminTransationsPage.jsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import CounterPage from './pages/CounterPage.jsx';
 
 /*
 react-router-dom is a library
@@ -70,7 +71,11 @@ const router = createBrowserRouter([
             {
                 path: "todo",
                 element: <TodoApp />
-            }
+            },
+            {
+                path: "counter",
+                element: <CounterPage />
+            },
         ]
 
     },

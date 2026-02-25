@@ -40,10 +40,10 @@ const HomePage = () => {
 
             <header className='max-w-6xl mx-auto px-4 py-20 text-center text-white'>
                 <h2 className='text-5xl font-bold mb-6'>
-                    Welcome to your Auth App
+                    Welcome to your App
                 </h2>
                 <p className='text-xl mb-8'>
-                    Built with React ,Appwrite and Zustand
+
                 </p>
                 {
                     !user && (

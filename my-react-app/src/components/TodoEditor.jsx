@@ -21,7 +21,9 @@ const TodoEditor = () => {
     const createTodo = async () => {
 
 
-        const newTodo = await appwriteTableDB.CreateRecord(import.meta.env.VITE_APPWRITE_DATABASE_ID, import.meta.env.VITE_APPWRITE_TODOS_TABLE_ID, { text: todo, description: "" })
+        const newTodo = await appwriteTableDB.CreateRecord(import.meta.env.VITE_APPWRITE_DATABASE_ID, import.meta.env.VITE_APPWRITE_TODOS_TABLE_ID,
+            { texttodo: todo, description: "" } // this is payload
+        )
         //createTodos(todo);
 
         return newTodo;
@@ -76,6 +78,9 @@ const TodoEditor = () => {
                 <input type="text" onChange={handleTodoTextChange} />
                 <button type="submit">Add Todo</button>
             </form>
+            {
+                mutation.isError && <p>{mutation.error.message}</p>
+            }
         </>
     )
 }

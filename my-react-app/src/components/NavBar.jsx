@@ -22,6 +22,10 @@ const NavBar = () => {
                                 className='bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition'>
                                 Profile
                             </Link>
+                            <Link to={"/todo"}
+                                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                Todo
+                            </Link>
                             {((CurrentUser?.$id && CurrentUser?.labels?.includes("admin")) && <Link to={"/admin-dashboard"} className="bg-blue-600 px-4 py-2 text-white rounded-lg hover:bg-blue-700 transition">My Dashboard</Link>)}
                         </>
                         //$id present only in appwrite
