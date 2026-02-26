@@ -8,30 +8,68 @@
 
 import { useNavigate } from "react-router-dom";
 import { appwriteAccount } from "../appwrite-serivces/AppwriteAccount";
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import { Bounce, toast } from "react-toastify";
+import PrimaryButton from "../components/PrimaryButton";
 
 const RegisterUserPage = () => {
-    const [name, setFullName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");// empty string is false
-    const [loading, setLoading] = useState(false);
+
+    const initialState = {
+        name: "",
+        email: "",
+        password: "",
+        confirmpassword: "",
+        error: null,
+        isSubmitting: false,
+    }
+
+    const reducer = (state, action) => {
+        switch (action.type) {
+
+            //payload carries field name and new value
+            case "SET_FIELD":
+                return {
+                    ...state,//copy existing keys
+                    [action.field]: action.value//use [] to set variable value as key name
+                };
+            case "SUBMIT_START":
+                return {
+                    ...state,
+                    isSubmitting: true,//if isSubmitting is true then show loading 
+                    error: null
+                }
+            case "SUBMIT_SUCCESS":
+                return {
+                    ...initialState
+                }//Reset form on success
+            case "ERROR":
+                return {
+                    ...state, isSubmitting: false,//on error occurs we need to stop loading
+                    error: true
+                }
+            default:
+                return state
+        }
+
+
+
+    }
+
+    const [state, dispatch] = useReducer(reducer, initialState);
 
 
     const navigate = useNavigate()
     const registerNewUser = async (event) => {
         event.preventDefault();
-        setLoading(true);
-        setError("")//on click we need to clear user message
-
-
-
+        // setLoading(true);
+        //setError("")//on click we need to clear user message
         try {
             //send post req to appwriter to create new user
 
             //send user data
-            const userData = { name, email, password }
+            console.log(state.name);
+            const userData = { name: state.name, email: state.email, password: state.password };
+            console.log(userData.email);
             await appwriteAccount.createUser(userData);
             toast.success('User Registered', {
                 position: "top-right",
@@ -45,12 +83,16 @@ const RegisterUserPage = () => {
                 transition: Bounce,
             });
 
+            dispatch({ type: "SUBMIT_SUCCESS" })
             //Redirect to login page
-            navigate("/login")
+            //  navigate("/login")
         }
         catch (error) {
 
-            setError(error.message || "Failed To Register")
+            console.log(error);
+
+            dispatch({ type: "ERROR" })
+            // setError(error.message || "Failed To Register")
             toast.error('Failed To Register', {
                 position: "top-right",
                 autoClose: 3000,
@@ -65,7 +107,7 @@ const RegisterUserPage = () => {
 
         }
         finally {
-            setLoading(false);
+            //setLoading(false);
         }
 
     }
@@ -78,38 +120,45 @@ const RegisterUserPage = () => {
             <h2 className="text-3x1 font-bold text-center text-gray-800 mb-6">
                 Create Account
             </h2>
-            {error && (
-                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-                    {error}
-                </div>
-            )}
             <input
+                name="name"
                 type="text"
-                value={name}
+                value={state.name}
                 required
                 placeholder="Enter FullName"
-                onChange={(e) => setFullName(e.target.value)}
+                onChange={(e) => dispatch({ type: "SET_FIELD", field: e.target.name, value: e.target.value })}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg  focus:outline-none focus-ring-2 focus:ring-purple-500" />
             <input
+                name="email"
                 type="email"
                 required
-                value={email}
+                value={state.email}
                 placeholder="Enter Email"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => dispatch({ type: "SET_FIELD", field: e.target.name, value: e.target.value })}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus-ring-2 focus:ring-purple-500" />
             <input
+                name="password"
                 type="password"
                 required
-                value={password}
+                value={state.password}
                 placeholder="Enter password"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => dispatch({ type: "SET_FIELD", field: e.target.name, value: e.target.value })}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus-ring-2 focus:ring-purple-500" />
-            <button
+            <input
+                name="confirmpassword"
+                type="password"
+                required
+                value={state.confirmpassword}
+                placeholder="Confirm your password"
+                onChange={(e) => dispatch({ type: "SET_FIELD", field: e.target.name, value: e.target.value })}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus-ring-2 focus:ring-purple-500" />
+            {/* <button
                 type="submit"
                 disabled={loading}
                 className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition disabled:opacity-50">
                 {loading ? "Creating Account..." : "Register"}
-            </button>
+            </button> */}
+            <PrimaryButton disabled={state.isSubmitting ? true : false}>{state.isSubmitting ? "Registering " : "Register"}</PrimaryButton>
             {/* // */}
             <p>Already have an account?{' '}
                 <button
@@ -119,6 +168,9 @@ const RegisterUserPage = () => {
                 >Login here
                 </button>
             </p>
+            {
+                state.error && <p>Error Occured:{state.error}</p>
+            }
         </form>
     </div>)
 }
