@@ -1,4 +1,5 @@
-import { ProfileCard } from './components/ProfileCard.jsx'
+import { ProfileCard } from "./ProfileCard";
+
 
 
 

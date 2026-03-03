@@ -1,7 +1,7 @@
 
 import { Link } from "react-router-dom";
 import useUserStore from "../stores/useUserStore";
-import { useEffect } from "react";
+
 
 const NavBar = () => {
     const CurrentUser = useUserStore((state) => state.user);

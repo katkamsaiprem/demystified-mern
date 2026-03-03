@@ -11,7 +11,7 @@ const TodoListing = () => {
         try {
             const todos = await appwriteTablesDB.getAllRecords(import.meta.env.VITE_APPWRITE_DATABASE_ID, import.meta.env.VITE_APPWRITE_TODOS_TABLE_ID);
             console.log(todos);
-            throw new Error("simple error")//to check error
+
             return todos;
         }
         catch (err) {
@@ -38,11 +38,11 @@ const TodoListing = () => {
     //     console.log("isPending is true");
 
     // }
-    if (isLoading)
 
-        if (isTodosPending) {//only on initial onmount it triggers
-            return <h1 className="text-5xl">Todos are Loading for the first time.......</h1>
-        }
+
+    if (isTodosPending && isTodosPending) {//only on initial onmount it triggers
+        return <h1 className="text-5xl">Todos are Loading for the first time.......</h1>
+    }
     return (
         <div className="flex flex-col items-center gap-3">
             {

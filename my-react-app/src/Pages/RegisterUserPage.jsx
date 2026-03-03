@@ -8,7 +8,7 @@
 
 import { useNavigate } from "react-router-dom";
 import { appwriteAccount } from "../appwrite-serivces/AppwriteAccount";
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 import { Bounce, toast } from "react-toastify";
 import PrimaryButton from "../components/PrimaryButton";
 
@@ -44,8 +44,9 @@ const RegisterUserPage = () => {
                 }//Reset form on success
             case "ERROR":
                 return {
-                    ...state, isSubmitting: false,//on error occurs we need to stop loading
-                    error: true
+                    ...state,
+                    isSubmitting: false,//on error occurs we need to stop loading
+                    error: action.message
                 }
             default:
                 return state
@@ -55,6 +56,7 @@ const RegisterUserPage = () => {
 
     }
 
+
     const [state, dispatch] = useReducer(reducer, initialState);
 
 
@@ -63,6 +65,11 @@ const RegisterUserPage = () => {
         event.preventDefault();
         // setLoading(true);
         //setError("")//on click we need to clear user message
+        if (state.password !== state.confirmpassword) {
+            dispatch({ type: "ERROR", message: "Passwords do not match" });
+            return;
+        }
+        dispatch({ type: "SUBMIT_START" });
         try {
             //send post req to appwriter to create new user
 
@@ -85,13 +92,13 @@ const RegisterUserPage = () => {
 
             dispatch({ type: "SUBMIT_SUCCESS" })
             //Redirect to login page
-            //  navigate("/login")
+             navigate("/login")
         }
         catch (error) {
 
             console.log(error);
 
-            dispatch({ type: "ERROR" })
+            dispatch({ type: "ERROR", message: error.message })
             // setError(error.message || "Failed To Register")
             toast.error('Failed To Register', {
                 position: "top-right",
@@ -117,7 +124,7 @@ const RegisterUserPage = () => {
             className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md space-y-4"
             onSubmit={registerNewUser}
         >
-            <h2 className="text-3x1 font-bold text-center text-gray-800 mb-6">
+            <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
                 Create Account
             </h2>
             <input
@@ -135,7 +142,7 @@ const RegisterUserPage = () => {
                 value={state.email}
                 placeholder="Enter Email"
                 onChange={(e) => dispatch({ type: "SET_FIELD", field: e.target.name, value: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus-ring-2 focus:ring-purple-500" />
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" />
             <input
                 name="password"
                 type="password"
@@ -143,7 +150,7 @@ const RegisterUserPage = () => {
                 value={state.password}
                 placeholder="Enter password"
                 onChange={(e) => dispatch({ type: "SET_FIELD", field: e.target.name, value: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus-ring-2 focus:ring-purple-500" />
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" />
             <input
                 name="confirmpassword"
                 type="password"
@@ -151,7 +158,7 @@ const RegisterUserPage = () => {
                 value={state.confirmpassword}
                 placeholder="Confirm your password"
                 onChange={(e) => dispatch({ type: "SET_FIELD", field: e.target.name, value: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus-ring-2 focus:ring-purple-500" />
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" />
             {/* <button
                 type="submit"
                 disabled={loading}

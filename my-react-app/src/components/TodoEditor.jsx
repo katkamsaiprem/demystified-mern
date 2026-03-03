@@ -22,7 +22,7 @@ const TodoEditor = () => {
 
 
         const newTodo = await appwriteTableDB.CreateRecord(import.meta.env.VITE_APPWRITE_DATABASE_ID, import.meta.env.VITE_APPWRITE_TODOS_TABLE_ID,
-            { texttodo: todo, description: "" } // this is payload
+            { text: todo, description: "" } // this is payload
         )
         //createTodos(todo);
 

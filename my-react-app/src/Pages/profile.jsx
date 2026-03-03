@@ -3,14 +3,16 @@ import { appwriteAccount } from "../appwrite-serivces/AppwriteAccount"
 import useUserStore from "../stores/useUserStore";
 import { useEffect } from "react";
 import { Bounce, toast } from "react-toastify";
+import { useUser } from "../stores/UserContext";
 
 const Profile = () => {
 
     //zustand store properties
-    const user = useUserStore((state) => state.user)
-    const clearUser = useUserStore((state) => state.clearUser)
-    const setUser = useUserStore((state) => state.setUser)
+    // const user = useUserStore((state) => state.user)
+    // const clearUser = useUserStore((state) => state.clearUser)
+    // const setUser = useUserStore((state) => state.setUser)
 
+    const { user, login: setUser, logOut: clearUser } = useUser();
 
     const navigate = useNavigate();
 
@@ -41,7 +43,7 @@ const Profile = () => {
             await appwriteAccount.logoutUser();
             clearUser();
             navigate("/login")
-            toast.success('User Registered', {
+            toast.success('User Logged out successfully', {
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: false,

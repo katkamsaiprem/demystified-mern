@@ -4,6 +4,7 @@ import useUserStore from "../stores/useUserStore";
 import { appwriteAccount } from "../appwrite-serivces/AppwriteAccount";
 import { useState } from "react";
 import { Bounce, toast } from "react-toastify";
+import { useUser } from "../stores/UserContext";
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -12,7 +13,10 @@ const LoginPage = () => {
     const [loading, setLoading] = useState(false);
 
 
-    const setUser = useUserStore((state) => state.setUser);
+    //zustand user
+    // const setUser = useUserStore((state) => state.setUser);
+    //useContext user
+    const { login: setUser } = useUser()
     const navigate = useNavigate();
 
 
@@ -26,7 +30,7 @@ const LoginPage = () => {
             try {
                 const existingUserData = await appwriteAccount.getCurrentUser();
                 //if no existingUserSession ,then it throws error exception
-                if (existingUserSession) {
+                if (existingUserData) {
                     //if user closes the index.html or refreshes the pages, store data get cleared but user login session data still present in cookies,
                     //but when you goes to homepage ,zustand says no user data, but appwrite says "you already logged in "
                     setUser(existingUserData)
@@ -99,7 +103,7 @@ const LoginPage = () => {
                 )}
                 <input className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="email" placeholder="Enter Email" required value={email} onChange={(e) => setEmail(e.target.value)} />
                 <input className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="password" placeholder="Enter password" required value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition disabled:opacity-50" type="submmit" disabled={loading} >{loading ? "Logging in..." : "Login"}</button>
+                <button className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition disabled:opacity-50" type="submit" disabled={loading} >{loading ? "Logging in..." : "Login"}</button>
                 <p>Don't have an account?{' '}
                     <button
                         className='text-blue-600 hover:underline font-semibold'
